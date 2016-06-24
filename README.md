@@ -20,15 +20,26 @@ To trigger the backup, use the following command:</br>
 ### Example:
 `docker run --rm -v /home/acarton/mongodb/backups:/backup -e MONGO_DATABASE=mydb --link my-mongo:mongo mongodb-backup:3.2.6`
 
+By default, the generated files will be created for the `root` user on the host machine. To avoid that, a possible option is to set the `USER_ID` environment variable for the docker command with the UID of your host user.
+
+For example, on my host machine, the result of the `id` command is:<br/>
+
+    % id
+    uid=1000(acarton) gid=1000(acarton)...
+
+To generate the files for user `acarton` instead of `root`, use to following command (it uses `gosu` under the hood): <br/>
+
+`docker run --rm -e USER_ID=1000 -v /home/acarton/mongodb/backups:/backup -e MONGO_DATABASE=mydb --link my-mongo:mongo mongodb-backup:3.2.6`
+
 ## Result
-    Starting MongoBD backup...
+    [Fri Jun 24 16:16:15 UTC 2016] Starting MongoBD backup with UID 1000...
     writing mydb.user to archive 'backup-mydb-20160624_161615.archive'
     2016-06-24T16:16:15.442+0000	done dumping mydb.user (1 document)
     dump-20160624_161615/
     dump-20160624_161615/mydb/
     dump-20160624_161615/mydb/user.bson
     dump-20160624_161615/mydb/user.metadata.json
-    Backup done: Fri Jun 24 16:16:15 UTC 2016
+    [Fri Jun 24 16:16:15 UTC 2016] Backup done
 
 ## Information
 Running this container will:
