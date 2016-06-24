@@ -36,11 +36,9 @@ Running this container will:
 
 - Create a subfolder with the current date and time (e.g. `20160624_161615`) (in case there are multiple backups the same day)
 
-- Create an archive (MongoDB archive format) (e.g. `backup-mydb-20160624_161615.archive`)
-Please refer to https://docs.mongodb.com/v3.2/reference/program/mongodump/#output-to-an-archive-file for more information.
-To restore a MongoDB archive file, please refer to https://docs.mongodb.com/v3.2/reference/program/mongorestore/#restore-a-database-from-an-archive-file
+- Create an archive (MongoDB archive format) (e.g. `backup-mydb-20160624_161615.archive`). Please refer to https://docs.mongodb.com/v3.2/reference/program/mongodump/#output-to-an-archive-file for more information. To restore a MongoDB archive file, please refer to https://docs.mongodb.com/v3.2/reference/program/mongorestore/#restore-a-database-from-an-archive-file
 
 - It also create a `tar.gz` file (e.g. `backup-mydb-20160624_161615.tar.gz`) containing the `dump-20160624_161615/` folder. If needed, untar it with `tar -xvf backup-mydb-20160624_161615.tar.gz`.
 Once done, use the following documentation to restore data from the extracted folder: https://docs.mongodb.com/v3.2/reference/program/mongorestore/#restore-with-access-control
 
-- Do not hesitate to modify `entrypoint.sh` if you only want the `.archive` or the tar.gz.
+- Do not hesitate to modify `entrypoint.sh` if you only want the `.archive` or the `tar.gz`.
